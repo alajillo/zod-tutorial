@@ -6,13 +6,19 @@ import { z } from "zod";
 const Form = z.object({
   password: z.string(),
   confirmPassword: z.string(),
-});
-//^ 🕵️‍♂️
-
+}).refine(
+  ({ confirmPassword, password }) => {
+    return confirmPassword === password;
+  },
+  {
+    path: ["confirmPassword"],
+    message: "Passwords don't match",
+  },
+);
+//^ 🕵️‍♂️)
 export const validateFormInput = (values: unknown) => {
-  const parsedData = Form.parse(values);
-
-  return parsedData;
+    const parsedData = Form.parse(values);
+    return parsedData;
 };
 
 // TESTS

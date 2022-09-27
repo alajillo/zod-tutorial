@@ -7,7 +7,6 @@ const doesStarWarsPersonExist = async (id: string) => {
   const data = await fetch("https://swapi.dev/api/people/" + id).then((res) =>
     res.json(),
   );
-
   return Boolean(data?.name);
 };
 

@@ -8,12 +8,12 @@ const doesStarWarsPersonExist = async (id: string) => {
   const data = await fetch("https://swapi.dev/api/people/" + id).then((res) =>
     res.json(),
   );
-
+  console.info('boolean',Boolean)
   return Boolean(data?.name);
 };
 
 const Form = z.object({
-  id: z.string(),
+  id: z.string().refine(doesStarWarsPersonExist,'Not found'),
   //           ^ 🕵️‍♂️
 });
 
